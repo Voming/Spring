@@ -5,6 +5,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,9 +18,13 @@ public class TestController {
 	@Autowired
 	private TestService testService ;
 	@Autowired  //bean을 연결해서 찾아줌 해당 자료형의 bean을 끌어옴
-	private TestDto testDto;
-	
-	
+	@Qualifier(value = "testDto")
+	private TestDto testDto; //이걸 여러개 선언해뒀을 경우 객체 이름을 주의해야함
+	@Autowired 
+	@Qualifier(value = "testDto2") //이전에는 잘 인식하지 못했기떄문에 사용함
+	private TestDto testdtoooooo;
+	@Autowired 
+	private TestDto testDto3;
 	
 //	private TestService service = new TestService(); 
 //	private TestService service; //아래처럼하지 않고 간단히
@@ -43,6 +49,8 @@ public class TestController {
 		
 		System.out.println("Dto bean 확인하기");
 		System.out.println(testDto);
+		System.out.println(testdtoooooo);
+		System.out.println(testDto3);
 		return "home";
 	}
 }

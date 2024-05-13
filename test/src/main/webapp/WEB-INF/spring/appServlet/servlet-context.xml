@@ -25,9 +25,14 @@
 	
 	<context:component-scan base-package="kh.mclass.ttt" />
 	
-    <beans:bean id="testDto" class="kh.mclass.ttt.sub.model.dto.TestDto">
-		<beans:constructor-arg name="a2" value="생성시값2"/>
-		<beans:property name="a1" value="생성시값1"/>
+	<context:component-scan base-package="kh.mclass.ttt">
+		<context:include-filter type="annotation" expression=""/>
+		<context:exclude-filter type="annotation" expression=""/>
+	</context:component-scan>
+
+  <!--   <beans:bean id="testDto" class="kh.mclass.ttt.sub.model.dto.TestDto">
+		<beans:constructor-arg name="a2" value="생성시값2A"/>
+		<beans:property name="a1" value="생성시값1A"/>
 		<beans:property name="testflieDto" ref="testFileDto"/>
 	</beans:bean>
 	
@@ -35,8 +40,8 @@
 		<beans:constructor-arg name="filePath" value="aaa.jpg"/>
 		<beans:constructor-arg name="fileType" value="jpg"/>
 	</beans:bean> 
-	
-<!-- <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+	 -->
+ <!-- <beans:bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
 		<beans:property name="mappings">
 			<beans:props>
 				<beans:prop key="/aaa">testController</beans:prop>  property형태로 값을 넣어줄 수 있음
