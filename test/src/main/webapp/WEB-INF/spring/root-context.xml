@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
+	<context:property-placeholder location="classpath:keyproperties/db.properties"/> 
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- 여기서는 그냥 bean으로 사용함 -->
+<!--  여기서는 그냥 bean으로 사용함 
 	<bean id="testDto3" class="kh.mclass.ttt.sub.model.dto.TestDto" init-method="init">
 		<constructor-arg name="a2" value="3생성시값2"/>
 		<property name="a1" value="3생성시값1"/>
@@ -26,6 +29,23 @@
 	<bean id="testFileDto" class="kh.mclass.ttt.sub.model.dto.TestFileDto">
 		<constructor-arg name="filePath" value="aaa.jpg"/>
 		<constructor-arg name="fileType" value="jpg"/>
-	</bean>  
+	</bean>   -->
 	
+	<!-- DB연동 관련 Bean들 -->
+	<!-- DBCP -->
+	<bean class = "org.apache.commons.dbcp2.BasicDataSource" id="dataSource" destroy-method="close">
+		<property name="driverClassName" value="${db.driverClassName}"></property>
+		<property name="url" value="${db.url}"></property>
+		<property name="username" value="${db.username}"></property>
+		<property name="password" value="${db.password}"></property>
+	</bean>
+	
+	<!-- mybatis -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean">
+	 	<property name="dataSource" ref="dataSource"></property>
+	 	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+	</bean>
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+	</bean>
 </beans>

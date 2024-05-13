@@ -25,10 +25,11 @@
 	
 	<context:component-scan base-package="kh.mclass.ttt" />
 	
-	<context:component-scan base-package="kh.mclass.ttt">
+	<!-- 포함 시킬 부분과 시키지 않을 부분 구분 -->
+	<!-- <context:component-scan base-package="kh.mclass.ttt">
 		<context:include-filter type="annotation" expression=""/>
 		<context:exclude-filter type="annotation" expression=""/>
-	</context:component-scan>
+	</context:component-scan> -->
 
   <!--   <beans:bean id="testDto" class="kh.mclass.ttt.sub.model.dto.TestDto">
 		<beans:constructor-arg name="a2" value="생성시값2A"/>
