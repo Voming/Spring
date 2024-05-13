@@ -12,8 +12,27 @@ import kh.mclass.ttt.member.model.dto.MemberRes;
 public class MemberDao {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public List<MemberRes> selectList(){
+
+	public List<MemberRes> selectList() {
 		return sqlSession.selectList("Member.list");
 	}
+	
+	public MemberRes selectOne(String memId) {
+		return sqlSession.selectOne("Member.one", memId);
+	}
+
+	public int insert() {
+//		return sqlSession.insert("Member.insert");
+		return 0;
+	}
+
+	public int update() {
+//		return sqlSession.update("Member.update");
+		return 0;
+	}
+	
+	public void insertAbc() {
+		
+	}
+
 }

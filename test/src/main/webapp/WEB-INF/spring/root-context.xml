@@ -2,8 +2,12 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<context:property-placeholder location="classpath:keyproperties/db.properties"/> 
 	<!-- Root Context: defines shared resources visible to all other web components -->
@@ -48,4 +52,33 @@
 	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
 		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
 	</bean>
+	
+	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="transactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	
+	<!-- 방법1 @Transactional 붙은 메소드 또는 클래스 -->
+	<tx:annotation-driven/>
+	
+	<!-- 방법2 -->
+	<!-- @Transactional을 활성화 시키기 위함 -->
+	<!-- <tx:advice id="txAdivice" transaction-manager="transactionManager">  -->
+	<!-- 반드시 transactionManager이 이름을 사용해야함 -->
+	<!-- transactionManager는 빈객체 이름임 따라서 bean에 담아와야함 -->
+		<!--<tx:attributes>
+			<tx:method name="insert*" rollback-for="Exception"/>
+			<tx:method name="update*" rollback-for="Exception"/>
+			<tx:method name="delete*" rollback-for="Exception"/>
+			<tx:method name="select*" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>-->
+	<!--<aop:config> 접근 리턴타입 패키지명 클래스명 / 점 두개는 여러개 있을수도 없을수도 있음 *모양은 반드시 1개이상 /
+		 .이랑 Service사이에는 *(한글자 이상의 메소드 명(+Service)이 있어야함)
+		(..)안에 자료형으로 제한 할 수 있음 (String, Integer)
+		<aop:pointcut expression="execution(public * kh..*Service.*(..))" id="serviceMethod"/>
+		<aop:advisor advice-ref="txAdivice" pointcut-ref="serviceMethod"/> 
+		pointcut에 advice를 걸어주겠다
+	</aop:config> -->
+	
 </beans>
