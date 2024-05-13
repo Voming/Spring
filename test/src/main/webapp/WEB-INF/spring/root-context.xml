@@ -4,5 +4,16 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<!-- 여기서는 그냥 bean으로 사용함 -->
+	<bean id="testDto" class="kh.mclass.ttt.sub.model.dto.TestDto" init-method="init">
+		<constructor-arg name="a2" value="생성시값2"/>
+		<property name="a1" value="생성시값1"/>
+		<property name="testflieDto" ref="testFileDto"/>
+	</bean>
+	
+	<bean id="testFileDto" class="kh.mclass.ttt.sub.model.dto.TestFileDto">
+		<constructor-arg name="filePath" value="aaa.jpg"/>
+		<constructor-arg name="fileType" value="jpg"/>
+	</bean>  
+	
 </beans>
