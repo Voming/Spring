@@ -8,10 +8,10 @@
 	</settings>
 
 	<typeAliases>
-		<package name="kh.mclass.ttt.sub.model.dto" />
+		<package name="kh.mclass.ttt.member.model.dto" />
 	</typeAliases>
 
-	<!-- <mappers>
-		<mapper resource="mappers/board-mapper.xml" />
-	</mappers> -->
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml" />
+	</mappers> 
 </configuration>
