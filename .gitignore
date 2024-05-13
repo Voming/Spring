@@ -27,8 +27,8 @@ replay_pid*
 *.metadata
 target/
 server/
-*.properties
+#*.properties
 properties/
-
+keyproperties/
 .project
 .classpath
