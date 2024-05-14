@@ -7,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import kh.mclass.ttt.member.model.dto.MemberRes;
 import kh.mclass.ttt.member.model.service.MemberService;
 
 @Controller
@@ -19,10 +18,15 @@ public class MemberController {
 	public String selectList(
 			Model model
 			) {
-		List<MemberRes> list = memberService.selectList();
-		model.addAttribute("memberlist", list);
-		
-		System.out.println(model);
-		return "member/list"; 
+		model.addAttribute("memberlist", memberService.selectList());
+		return "member/list";
+	}
+	@GetMapping("/member/one")
+	public String selectList(
+			Model model
+			, String memId
+			) {
+		model.addAttribute("member", memberService.selectOne(memId));
+		return "member/one";
 	}
 }
