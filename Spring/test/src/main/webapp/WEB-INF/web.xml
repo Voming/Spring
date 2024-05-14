@@ -29,5 +29,16 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-
+	
+	<bean class="kh.mclass.ttt.common.LoginIntercepter" id="loginIntercepter"></bean>
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/> <!-- /**/* 이렇게 쓴 곳도 있음... depth에 유의하기 -->
+			<mvc:exclude-mapping path="/login"/> <!--  -->
+			<mvc:exclude-mapping path="/join"/>
+			<mvc:exclude-mapping path="/main/*"/>
+			<mvc:exclude-mapping path="/resources/**"/>
+			<ref bean="loginIntercepter"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 </web-app>
