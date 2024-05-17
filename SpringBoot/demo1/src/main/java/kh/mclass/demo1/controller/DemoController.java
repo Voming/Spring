@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class DemoController {
+	
 	@GetMapping("/main")
 	public String mainMethod(){
-		System.out.println();
-		
+		System.out.println();	
 		return "aaa";
 	}
 
