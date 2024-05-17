@@ -8,6 +8,7 @@
 </head>
 <body>
 <h1>jsp¿‘¥œ¥Ÿ</h1>
-[[${m1 }]]
+[[${boardlist }]]
+
 </body>
 </html>
