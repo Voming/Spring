@@ -1,0 +1,13 @@
+@charset "UTF-8";
+/* common/header.html */
+
+.navbar ul {
+	display: flex;
+	list-style-type: none;
+}
+
+
+.navbar li{
+	padding: 15px;
+}
+

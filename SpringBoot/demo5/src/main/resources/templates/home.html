@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
-<head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('Home')}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>home</title>
 </head>
 <body>
-<h1>home html</h1>
+	<div class="header" th:insert="~{common/header :: topnav}"></div>
+	<section>
+		<h1>Home</h1>
+		<div class="header" th:replace="~{common/header :: aaa}"></div>
+	</section>
 </body>
 </html>

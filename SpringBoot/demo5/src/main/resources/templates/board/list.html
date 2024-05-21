@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{common/header :: head('Board List')}">
+</head>
+<body>
+	<div class="header" th:insert="~{common/header :: topnav}"></div>
+	<section>
+		<h1>Board / List html</h1>
+	<!-- <div th:each="board: ${boardlist}">
+	<div th:text="${board.boardId}"></div>
+	<div th:text="${board.boardTitle}"></div>
+	<div th:text="${board.boardContent}"></div>
+	</div> -->
+
+		<div th:each="board: ${boardlist}">
+			<div th:object="${board}">
+				<p th:text="*{boardId}"></p>
+				<p th:text="*{boardTitle}"></p>
+				<p th:text="*{boardContent}"></p>
+			</div>
+		</div>
+	</section>
+	<!-- <p th:text="${board.boardId}"></p>
+<p th:text="${board.boardTitle}"></p>
+<p th:text="${board.boardContent}"></p>
+<div th:object="${session.demosession}">
+<p th:text="*{boardId}"></p>
+<p th:text="*{boardTitle}"></p>
+<p th:text="*{boardContent}"></p> -->
+	</div>
+</body>
+</html>
