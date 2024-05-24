@@ -19,10 +19,6 @@ import kh.mclass.demo5.common.LoginInterceptor;
 public class MyConfiguration implements WebMvcConfigurer{
 //	@Autowired
 //	private LoginInterceptor loginInterceptor;
-	
-	@Bean
-	
-	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new HandlerInterceptor() {
