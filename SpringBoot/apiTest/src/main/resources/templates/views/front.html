@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+</head>
+<body>
+	<h1>Open api / front</h1>
+	<p id="result"></p>
+	<div>
+		<!-- <span>informCode : </span> <span>dataTime : </span> -->
+	</div>
+	<script>
+	let pageNo = 1;
+	let numOfRows =10;
+	var totalCount  = 10;
+
+	console.log(obj);
+	console.log(JSON.stringify(obj)); //obj.pageNo 접근 불가(obj["pageNo"]도 불가)
+	
+	
+	for(pageNo =1; pageNo < (totalCount/numOfRows)+1; pageNo +=10){
+		var obj = {//검색어 입력할 때 encodeURI사용(but 레식이 인코딩해서 갈 것)
+				//serviceKey:encodeURI("t+MBfXyUlsCG64LCFFpv/VotwMILtIfeNO7zAeIjdTWYPTgoNLBWkbOaqy9OXo3PMctejj/Xe7pWVinitw3AUg=="),
+				//ajax, jqeury형식일때는 기호있는거 안써도 돼
+				ServiceKey:"t+MBfXyUlsCG64LCFFpv/VotwMILtIfeNO7zAeIjdTWYPTgoNLBWkbOaqy9OXo3PMctejj/Xe7pWVinitw3AUg==",//2중 인코딩이 되어서 디코딩 키를 사용해야함
+				returnType:"json",
+				numOfRows:"10",
+				pageNo:pageNo
+			};
+		getData(obj);
+		
+	}
+	
+	
+	function getData(obj){
+			$.ajax({
+					url : "https://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth",
+					data : obj, //JSON.stringify(obj),  
+					type : "GET",//json 으로 데이터 전송 시 RequestParam --> POST
+					//contentType:"application/json", // data부분이 object형식이라 오류남
+					dataType:"json",
+					success:function(result){
+						console.log(result);
+						//document.write(JSON.parse(result));
+						var items = result.response.body.items;
+						totalCount = result.response.body.totalCount;
+						var htmlVal ="";
+						for(var i=0;i<items.length; i++){
+							htmlVal += `
+							<div>
+								<span>informCode : ${items[i].informCode}</span>
+								<span>dataTime : ${items[i].dataTime}</span>
+							</div>
+							
+							`;
+						}
+						$("#result").append(htmlVal);
+					}
+				});
+	}
+	</script>
+</body>
+</html>
